@@ -1,0 +1,7 @@
+{
+  "name": "Copy of ARNE OLSEN Direct Rentals",
+  "description": "Premium rental properties managed directly by the owner. Transparent leasing, dedicated maintenance, and high-quality living spaces.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
