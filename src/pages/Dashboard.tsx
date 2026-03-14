@@ -1,3 +1,4 @@
+import { apiUrl } from '../lib/utils';
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Plus, Trash2, Edit, Home, MapPin, Users, CheckCircle, XCircle, RefreshCw, Minus, PlusCircle, Upload, Image as ImageIcon } from 'lucide-react';
@@ -42,14 +43,14 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const fetchSlideshow = async () => {
-    const res = await fetch('/api/hero-slideshow');
+    const res = await fetch(apiUrl('/api/hero-slideshow');
     const data = await res.json();
     setSlideshow(data);
   };
 
   const addSlide = async () => {
     if (!newSlideUrl) return;
-    await fetch('/api/hero-slideshow', {
+    await fetch(apiUrl('/api/hero-slideshow', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ image_url: newSlideUrl, display_order: slideshow.length })
@@ -69,7 +70,7 @@ const Dashboard: React.FC = () => {
     formData.append('file', file);
 
     try {
-      const res = await fetch('/api/upload', {
+      const res = await fetch(apiUrl('/api/upload', {
         method: 'POST',
         body: formData
       });
@@ -85,7 +86,7 @@ const Dashboard: React.FC = () => {
   };
 
   const fetchSettings = async () => {
-    const res = await fetch('/api/settings');
+    const res = await fetch(apiUrl('/api/settings');
     const data = await res.json();
     setSettings(data);
     setHeroImageUrl(data.hero_image_url || '');
@@ -94,7 +95,7 @@ const Dashboard: React.FC = () => {
   const updateHeroImage = async () => {
     setIsUpdatingSettings(true);
     try {
-      await fetch('/api/settings/hero_image_url', {
+      await fetch(apiUrl('/api/settings/hero_image_url', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ value: heroImageUrl })
@@ -109,7 +110,7 @@ const Dashboard: React.FC = () => {
   };
 
   const fetchProperties = async () => {
-    const res = await fetch('/api/properties');
+    const res = await fetch(apiUrl('/api/properties');
     const data = await res.json();
     setProperties(data);
   };

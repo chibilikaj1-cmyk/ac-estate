@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Property } from '../types';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { cn } from '../lib/utils';
+import { cn, apiUrl } from '../lib/utils';
 
 export function Projects() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -25,11 +25,11 @@ export function Projects() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/api/properties')
+    fetch(apiUrl('/api/properties')
       .then(res => res.json())
       .then(data => { setProperties(data); setFilteredProperties(data); setIsLoading(false); });
     if (isAuthenticated) {
-      fetch('/api/favorites')
+      fetch(apiUrl('/api/favorites')
         .then(res => res.json())
         .then(data => setFavorites(data.map((f: Property) => f.id)));
     }

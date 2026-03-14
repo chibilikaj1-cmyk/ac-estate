@@ -3,7 +3,7 @@ import { ArrowRight, MapPin, Star, Shield, Zap, Users, Search, DollarSign, Chevr
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Property } from '../types';
-import { cn } from '../lib/utils';
+import { cn, apiUrl } from '../lib/utils';
 
 export function Home() {
   const [featuredProperties, setFeaturedProperties] = useState<Property[]>([]);
@@ -14,13 +14,13 @@ export function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/api/properties')
+    fetch(apiUrl('/api/properties')
       .then(res => res.json())
       .then(data => setFeaturedProperties(data.filter((p: Property) => p.featured)));
-    fetch('/api/settings')
+    fetch(apiUrl('/api/settings')
       .then(res => res.json())
       .then(data => setSettings(data));
-    fetch('/api/hero-slideshow')
+    fetch(apiUrl('/api/hero-slideshow')
       .then(res => res.json())
       .then(data => setSlideshow(data));
   }, []);

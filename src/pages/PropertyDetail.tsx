@@ -1,3 +1,4 @@
+import { apiUrl } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
@@ -44,7 +45,7 @@ export function PropertyDetail() {
       });
 
     if (isAuthenticated) {
-      fetch('/api/favorites')
+      fetch(apiUrl('/api/favorites')
         .then(res => res.json())
         .then(data => {
           setIsFavorite(data.some((f: Property) => f.id === Number(id)));
@@ -72,7 +73,7 @@ export function PropertyDetail() {
   const handleApply = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const res = await fetch('/api/applications', {
+    const res = await fetch(apiUrl('/api/applications', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 
@@ -92,7 +93,7 @@ export function PropertyDetail() {
   const handleMaintenance = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const res = await fetch('/api/maintenance', {
+    const res = await fetch(apiUrl('/api/maintenance', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ property_id: id, tenant_name: maintForm.name, issue_description: maintForm.issue, priority: maintForm.priority })

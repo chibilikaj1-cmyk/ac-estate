@@ -1,3 +1,4 @@
+import { apiUrl } from '../lib/utils';
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { useAuth } from '../context/AuthContext';
@@ -24,8 +25,8 @@ export function ProfilePage() {
       const fetchData = async () => {
         try {
           const [favsRes, appsRes] = await Promise.all([
-            fetch('/api/favorites'),
-            fetch('/api/my-applications')
+            fetch(apiUrl('/api/favorites'),
+            fetch(apiUrl('/api/my-applications')
           ]);
           if (favsRes.ok) setFavorites(await favsRes.json());
           if (appsRes.ok) setApplications(await appsRes.json());
